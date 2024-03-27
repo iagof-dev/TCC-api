@@ -1,4 +1,5 @@
 create database if not exists SGDB;
+
 use SGDB;
 
 create table if not exists alunos(
@@ -53,4 +54,20 @@ autor text not null,
 acao tinytext not null,
 sujeito tinytext,
 data datetime not null
+);
+
+
+create table if not exists notificacoes(
+id int primary key auto_increment,
+numero varchar(20) not null,
+id_emprestimo smallint not null,
+data datetime not null,
+iteracao int(1) not null
+);
+
+create table if not exists coordenadores(
+id int primary key auto_increment,
+nome mediumtext not null,
+numero varchar(20) not null,
+curso tinytext not null
 );
