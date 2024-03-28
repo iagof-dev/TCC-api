@@ -14,5 +14,6 @@ class cliente
             unset($_POST['apipass']);
             return true;
         }
+        return false;
     }
 }

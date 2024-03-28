@@ -23,20 +23,7 @@ class DB
 
     function connect($database)
     {
-        return new PDO("mysql:host={$this->host};dbname={$database};charset=UTF8", $this->user, $this->pass);
-    }
-
-    function RegisterPayment($customer_id, $seller_id, $product_id, $customer_email, $collection_id, $payment_id, $status, $date){
-        $db = DB::connect("bytestore");
-        $com = "insert into payments values (default, $customer_id, $seller_id, $product_id,'$customer_email', $collection_id, '$payment_id', '$status', '$date');";
-        
-       
-        // echo($com);
-        
-        $rs = $db->prepare($com);
-        $rs->execute();
-        $numRowsAffected = $rs->rowCount();
-        return $numRowsAffected;
+        return new PDO("mysql:host={$this->host}:{$this->port};dbname={$database};charset=UTF8", $this->user, $this->pass);
     }
 
 }

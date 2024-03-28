@@ -36,15 +36,12 @@ include_once("classes/secret.php");
 include_once("classes/usuario.php");
 
 
-///
-///     Autenticação
-///
 
-$verificado = (new cliente())->checkPermission();;
+//
 
 $db = (new DB())->connect("SGDB");
 
 #API
-include_once("./api/usuario/usuario.php");
+include_once("./api/alunos/alunos.php");
 
 ?>

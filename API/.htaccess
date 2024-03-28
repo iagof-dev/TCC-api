@@ -4,4 +4,3 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ index.php?path=$1 [QSA,L]
 
 php_flag log_erros on
-php_value error_log /home/n3rdy/error_log.txt
