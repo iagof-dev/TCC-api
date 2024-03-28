@@ -7,7 +7,7 @@ rm int(6) primary key auto_increment,
 nome mediumtext not null,
 ano int(2) not null,
 curso tinytext not null,
-telefone char(11) not null unique
+telefone char(20) not null unique
 );
 
 create table if not exists bibliotecarias(
