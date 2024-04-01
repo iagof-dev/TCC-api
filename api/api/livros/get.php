@@ -4,8 +4,19 @@ $rs = "";
 
 switch ($action) {
     case 'listar':
-        $rs = $db->prepare("select * from ALUNOS;");
+        switch ($param){
+
+            case "genero":
+                // select with inner join
+                $rs = $db->prepare("select * from livros;");
+                break;
+
+            default:
+            $rs = $db->prepare("select * from livros;");
+            break;
+        }
         break;
+        
 }
 
 $rs->execute();

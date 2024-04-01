@@ -23,7 +23,11 @@ class DB
 
     function connect($database)
     {
-        return new PDO("mysql:host={$this->host};port={$this->port};dbname={$database};charset=UTF8;", $this->user, $this->pass);
+        return new PDO("mysql:host={$this->host}:{$this->port};dbname={$database};charset=UTF8", $this->user, $this->pass);
+    }
+
+    function createLog($who, $victim, $action){
+
     }
 
 }

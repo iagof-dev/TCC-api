@@ -1,6 +1,6 @@
 <?php
 $com = "";
-$rs = null;
+$rs = "";
 
 switch ($action) {
     case 'listar':

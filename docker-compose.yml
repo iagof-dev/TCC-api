@@ -1,4 +1,4 @@
-version: '3.8'
+version: '3'
 
 services:
   api:
@@ -14,11 +14,11 @@ services:
     networks:
       - my_network
     depends_on:
-      - mysql-api
+      - mysql
 
-  mysql-api:
+  mysql:
     image: mysql:5.7
-    container_name: mysql-api
+    container_name: mysql
     environment:
       MYSQL_ROOT_PASSWORD: 132490Kj@br=
       MYSQL_DATABASE: sgdb
@@ -28,9 +28,8 @@ services:
       - ./mysql-data:/var/lib/mysql
       - ./db.sql:/docker-entrypoint-initdb.d/db.sql
       - ./init-db.sh:/usr/local/bin/init-db.sh
-    command: ["--init-file", "/usr/local/bin/init-db.sh"]
     ports:
-      - "3309:3306"
+      - "3306:3306"
     networks:
       - my_network
 

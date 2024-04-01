@@ -39,7 +39,7 @@ include_once("classes/usuario.php");
 
 //
 
-$db = (new DB())->connect("nrdydev1_sgbd");
+$db = (new DB())->connect("SGDB");
 
 #API
 include_once("./api/alunos/alunos.php");
