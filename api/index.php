@@ -11,7 +11,7 @@ if (isset($_GET['path'])) {
 if (isset($path[0])) {
     $api = $path[0];
 }
-if (isset($path[1])) {
+if (isset($path[1])) {  
     $action = $path[1];
 }
 if (isset($path[2])) {

@@ -1,13 +1,20 @@
-create database if not exists SGDB;
+create database if not exists SGBE;
 
-use SGDB;
+use SGBE;
 
 create table if not exists alunos(
 rm int(6) primary key auto_increment,
 nome mediumtext not null,
 ano int(2) not null,
-curso tinytext not null,
+id_curso int not null,
 telefone char(20) not null unique
+);
+
+create table if not exists curso(
+    id int primary key auto_increment,
+    ano tinytext not null,
+    curso tinytext not null,
+    periodo tinytext not null,
 );
 
 create table if not exists bibliotecarias(
@@ -27,25 +34,21 @@ sinopse text not null
 
 create table if not exists generos(
 id int primary key auto_increment,
-tipo tinytext not null
+genero tinytext not null
 );
 
 create table if not exists livro_generos(
-id_livro int not null,
-id_genero int not null,
-foreign key (id_livro) REFERENCES livros(id),
-foreign key (id_genero) REFERENCES generos(id)
+id_livro int not null REFERENCES livros(id),
+id_genero int not null REFERENCES generos(id)
 );
 
 create table if not exists emprestimos(
 id int auto_increment primary key,
-id_aluno int not null,
-id_livro int not null,
+id_aluno int not null references alunos(rm),
+id_livro int not null references livros(id),
 data_aluguel date not null,
 data_devolucao date not null,
-status_livro varchar(20) not null,
-foreign key (id_aluno) references alunos(rm),
-foreign key (id_livro) references livros(id)
+status_livro varchar(20) not null
 );
 
 create table if not exists c_logs(
@@ -61,17 +64,29 @@ create table if not exists notificacoes(
 id int primary key auto_increment,
 numero varchar(20) not null,
 id_emprestimo smallint not null,
-data datetime not null,
-iteracao int(1) not null
+data_envio datetime not null,
+iteracao int(1) not null -- Corresponde a quantidade de vezes de notificação enviadas ao pedido de devolução especifico
+                         -- Com o objetivo de manter o controle da ordem de envio das notificações.
+                         -- Exemplo: Foi enviada uma notificação hoje, valor: 1 para id de devolução #1234, amanhã será enviado outro
 );
 
 create table if not exists coordenadores(
 id int primary key auto_increment,
 nome mediumtext not null,
 numero varchar(20) not null,
-curso tinytext not null
 );
 
+create table if not exists curso_coordenadores(
+    id int primary key auto_increment,
+    id_curso int REFERENCES cursos(id),
+    id_coordenador int REFERENCES coordenadores(id)
+);
+
+create table if not exists avaliacao(
+    id int primary key auto_increment,
+    id_livro int REFERENCES livros(id),
+
+);
 
 insert into alunos values (default, 'Iago Fragnan', 3, 'Desenvolvimento de Sistemas', '11'),
 (default, 'Arthur Santana', 3, 'Desenvolvimento de Sistemas', '75'),
