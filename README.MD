@@ -17,7 +17,8 @@ oq vai precisar criar
 
 ### Emprestimos:
     - Select
-    
+    - Select com rm/id especifico
+
 
 ### Avaliação
 
