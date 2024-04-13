@@ -17,8 +17,8 @@ if (isset($path[1])) {
 if (isset($path[2])) {
     $param = $path[2];
 }
-if(isset($path[4])){
-    $param2 = $path[4];
+if(isset($path[3])){
+    $param2 = $path[3];
 }
 if ($api == '') {
     echo json_encode(["data" => "Especifique a função"]);
@@ -43,5 +43,7 @@ $db = (new DB())->connect("sgbe");
 
 #API
 include_once("./api/alunos/alunos.php");
+include_once("./api/livros/livros.php");
+
 
 ?>

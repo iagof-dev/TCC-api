@@ -7,7 +7,6 @@ if ($api == 'generos' && $method == 'GET') {
 if ($api == 'generos' && $method == 'POST') {
     if(!(new cliente())->checkPermission())
     {
-        ob_clean();
         echo(json_encode(["status" => "error", "message" => "Sem permissão!"]));
         die();
     }
