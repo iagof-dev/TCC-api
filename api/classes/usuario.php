@@ -11,7 +11,7 @@ class cliente
         //Token: c38a7e02bfca0da201015ce51931b09d462080b7
 
         if ($_POST['authpass'] == "c38a7e02bfca0da201015ce51931b09d462080b7") {
-            unset($_POST['apipass']);
+            unset($_POST['authpass']);
             return true;
         }
         return false;
