@@ -90,17 +90,23 @@ where
 
 SELECT
     l.id,
+    l.codigo,
     l.titulo,
     a.autor,
-    e.editora
+    e.editora,
+    g.genero
 FROM
     livros as l
     inner join autores as a
     inner join editoras as e
+    inner join livro_generos as lg
+    inner join generos as g
 where
     l.id_autor = a.id
     and l.id_editora = e.id
-    and l.codigo = '2';
+    and lg.id_genero = g.id
+    and lg.id_livro = l.id
+    and lg.codigo = '2';
 
 UPDATE livros
 SET

@@ -8,30 +8,15 @@ $message = "";
 
 switch ($action) {
     case 'criar':
-
-        //codigo
-        //titulo
-        //id_autor
-        //id_editora
-        //capa
-        //volumes
-        //sinopse
-
-        $rs = "";
-        break;
-
-    case 'editar':
-
-        break;
-
-
-    case 'deletar':
-        switch($param){
-            case 'codigo':
-                break;
-            case 'id':
-                break;
+        $com = "INSERT INTO bibliotecarias (";
+        $values = "";
+        foreach ($_POST as $key => $value) {
+            $com .= $key . ",";
+            $values .= "'" . $value . "',";
         }
+        $com = rtrim($com, ',') . ") VALUES (";
+        $values = rtrim($values, ',') . ");";
+        $com .= $values;
         break;
 }
 

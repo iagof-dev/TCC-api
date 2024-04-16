@@ -44,6 +44,7 @@ $db = (new DB())->connect("sgbe");
 #API
 include_once("./api/alunos/alunos.php");
 include_once("./api/livros/livros.php");
+include_once("./api/bibliotecarias/bibliotecarias.php");
 
 
 ?>
