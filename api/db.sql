@@ -7,7 +7,7 @@ CREATE TABLE
         rm INT (6) PRIMARY KEY AUTO_INCREMENT,
         nome TINYTEXT NOT NULL,
         id_curso INT NOT NULL,
-        telefone CHAR(12) NOT NULL  -- Numero é char
+        telefone CHAR(11) NOT NULL  -- Numero é char
     );
 
 CREATE TABLE
@@ -63,13 +63,13 @@ CREATE TABLE
 CREATE TABLE
     IF NOT EXISTS emprestimos (
         id INT AUTO_INCREMENT PRIMARY KEY,
-        id_aluno INT NOT NULL REFERENCES alunos (rm),
+        rm_aluno INT NOT NULL REFERENCES alunos (rm),
         id_bibliotecaria INT NOT NULL REFERENCES bibliotecarias (id),
         id_livro INT NOT NULL REFERENCES livros (id),
         data_aluguel DATE NOT NULL,
         data_devolucao DATE NOT NULL,
         status_livro VARCHAR(20) NOT NULL, -- PENDENTE, AO DEVOLVER, DEVOLVIDO
-        prazo int not null
+        prazo INT NOT NULL
     );
 
 CREATE TABLE
@@ -99,14 +99,14 @@ CREATE TABLE
     IF NOT EXISTS coordenadores (
         id INT PRIMARY KEY AUTO_INCREMENT,
         nome TINYTEXT NOT NULL,
-        telefone CHAR(12) NOT NULL
+        telefone CHAR(11) NOT NULL
     );
 
 CREATE TABLE
     IF NOT EXISTS curso_coordenadores (
         id INT PRIMARY KEY AUTO_INCREMENT,
-        id_curso INT REFERENCES cursos (id),
-        id_coordenador INT REFERENCES coordenadores (id)
+        id_curso INT NOT NULL REFERENCES cursos (id),
+        id_coordenador INT NOT NULL REFERENCES coordenadores (id)
     );
 
 CREATE TABLE

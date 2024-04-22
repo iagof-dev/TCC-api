@@ -14,7 +14,7 @@ try{
 
 
     if(empty($obj)){
-        echo json_encode(["status" => "error","DATA" => "dado não encontrado"]);
+        echo json_encode(["status" => "error","DATA" => "Dado não encontrado"]);
     }
     else{
         echo json_encode(["status" => "success","DATA" => $obj]);
