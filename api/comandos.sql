@@ -1,5 +1,8 @@
+----------------------------------------------------------------------------
 -- INSERTS DE EXEMPLOS PARA TESTE DA API --
 -- 100% ATUALIZADO, É RUIM DE ATURAR, VIROU MODA E TODO MUNDO QUER TESTAR --
+----------------------------------------------------------------------------
+
 -- ALUNOS
 SELECT
     al.rm,
@@ -140,9 +143,9 @@ FROM
     emprestimos as lo
     INNER JOIN livros as lv
     INNER JOIN alunos as al
-WHERE
-    lo.id_aluno = al.rm
-    and lo.id_livro = lv.id;
+WHERE 
+	lo.id_livro = lv.id
+    AND lo.rm_aluno = al.rm;
 
 SELECT
     lo.id,
@@ -155,10 +158,10 @@ FROM
     emprestimos as lo
     INNER JOIN livros as lv
     INNER JOIN alunos as al
-WHERE
-    lo.id_aluno = al.rm
-    and lo.id_livro = lv.id
-    and lo.id = 1;
+WHERE 
+	lo.id_livro = lv.id
+    AND lo.id_aluno = al.rm
+    AND al.rm = 2210002;
 
 SELECT
     lo.id,
@@ -171,10 +174,10 @@ FROM
     emprestimos as lo
     INNER JOIN livros as lv
     INNER JOIN alunos as al
-WHERE
-    lo.id_aluno = al.rm
-    and lo.id_livro = lv.id
-    and lo.id_aluno = 221059;
+WHERE 
+	lo.id_livro = lv.id
+    AND lo.id_aluno = al.rm
+    AND lo.id_livro = 2;
 
 SELECT
     lo.id,
@@ -187,26 +190,10 @@ FROM
     emprestimos as lo
     INNER JOIN livros as lv
     INNER JOIN alunos as al
-WHERE
-    lo.id_aluno = al.rm
-    and lo.id_livro = lv.id
-    and lv.id = 3;
-
-SELECT
-    lo.id,
-    al.rm,
-    lv.titulo,
-    lo.data_aluguel,
-    lo.data_devolucao,
-    lo.status_livro
-FROM
-    emprestimos as lo
-    INNER JOIN livros as lv
-    INNER JOIN alunos as al
-WHERE
-    lo.id_aluno = al.rm
-    and lo.id_livro = lv.id
-    and lv.codigo = 1003;
+WHERE 
+	lo.id_livro = lv.id
+    AND lo.rm_aluno = al.rm
+    AND lo.status_livro = "PENDENTE";
 
 -- AVALIAÇÃO
 SELECT
@@ -265,3 +252,16 @@ FROM
 WHERE
     id_coordenador = cor.id
     AND cur_cor.id_curso = cur.id;
+
+
+-- LIVROS GENEROS
+
+select li.id, li.codigo, li.titulo, li.capa,li.volumes, li.sinopse, g.genero from livro_generos as lg
+		INNER JOIN livros as li
+        INNER JOIN generos as g
+        INNER JOIN autores as a
+        INNER JOIN editoras as e
+        WHERE lg.id_livro = li.id
+        AND lg.id_genero = g.id
+        AND li.id_autor = a.id
+        AND li.id_editora = e.id;
