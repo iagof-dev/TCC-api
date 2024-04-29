@@ -15,7 +15,7 @@ $rs = "";
 
 switch ($action) {
     default:
-        $rs = $db->prepare("SELECT * FROM ;");
+        $rs = $db->prepare("SELECT * FROM livros_generos;");
         break;
 }
 
