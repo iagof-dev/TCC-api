@@ -1,14 +1,10 @@
 <?php
 
 
-if ($api == 'avalicoes' && $method == 'GET') {
-    if (empty($_POST)) {
-        echo (json_encode(["status" => "error", "message" => "Nenhum argumento foi passado"]));
-        die();
-    }
+if ($api == 'avaliacoes' && $method == 'GET') {
     include_once("get.php");
 }
-if ($api == 'avalicoes' && $method == 'POST') {
+if ($api == 'avaliacoes' && $method == 'POST') {
     if(!(new cliente())->checkPermission())
     {
         ob_clean();

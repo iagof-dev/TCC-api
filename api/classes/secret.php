@@ -2,10 +2,10 @@
 
 class config{
   private $informations = [
-    "db_ip" => "mysql", //colocar "mysql" de volta dps
-    "db_port" => "3306",
+    "db_ip" => "127.0.0.1", //colocar "mysql" de volta dps
+    "db_port" => "3307",
     "db_user" => "root",
-    "db_pass" => "132490Kj@br="
+    "db_pass" => ""
   ];
 
   function get(){

@@ -2,10 +2,6 @@
 
 
 if ($api == 'bibliotecarias' && $method == 'GET') {
-    if (empty($_POST)) {
-        echo (json_encode(["status" => "error", "message" => "Nenhum argumento foi passado"]));
-        die();
-    }
     include_once("get.php");
 }
 if ($api == 'bibliotecarias' && $method == 'POST') {

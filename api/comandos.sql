@@ -63,7 +63,7 @@ FROM
     livros as l
     inner join autores as a
     inner join editoras as e
-    inner join livro_generos as lg
+    inner join livros_generos as lg
     inner join generos as g
 WHERE
     l.id_autor = a.id
@@ -82,7 +82,7 @@ FROM
     livros as l
     inner join autores as a
     inner join editoras as e
-    inner join livro_generos as lg
+    inner join livros_generos as lg
     inner join generos as g
 where
     l.id_autor = a.id
@@ -102,7 +102,7 @@ FROM
     livros as l
     inner join autores as a
     inner join editoras as e
-    inner join livro_generos as lg
+    inner join livros_generos as lg
     inner join generos as g
 where
     l.id_autor = a.id
@@ -196,6 +196,13 @@ WHERE
     AND lo.status_livro = "PENDENTE";
 
 -- AVALIAÇÃO
+SELECT * FROM avaliacoes;
+
+SELECT av.id, al.nome,av.avaliacao FROM avaliacoes as av
+		INNER JOIN alunos as al
+        WHERE av.id_aluno=al.rm
+        AND id_livro;
+
 SELECT
     COUNT(avaliacao) as avaliadores,
     SUM(avaliacao) as nota
@@ -256,7 +263,7 @@ WHERE
 
 -- LIVROS GENEROS
 
-select li.id, li.codigo, li.titulo, li.capa,li.volumes, li.sinopse, g.genero from livro_generos as lg
+select li.id, li.codigo, li.titulo, li.capa,li.volumes, li.sinopse, g.genero from livros_generos as lg
 		INNER JOIN livros as li
         INNER JOIN generos as g
         INNER JOIN autores as a

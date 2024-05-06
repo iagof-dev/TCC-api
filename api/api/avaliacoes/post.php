@@ -1,8 +1,4 @@
 <?php
-if (empty($_POST)) {
-    echo (json_encode(["status" => "error", "message" => "Nenhum argumento foi passado"]));
-    exit(0);
-}
 $com = "";
 $message = "";
 
