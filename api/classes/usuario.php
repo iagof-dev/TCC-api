@@ -14,6 +14,8 @@ class cliente
             unset($_POST['authpass']);
             return true;
         }
-        return false;
+        ob_clean();
+        echo(json_encode(["status" => "error", "message"=>"token de autenticação invalido."]));
+        die();
     }
 }

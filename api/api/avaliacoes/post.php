@@ -14,6 +14,11 @@ switch ($action) {
         $values = rtrim($values, ',') . ");";
         $com .= $values;
         break;
+
+
+    default:
+        echo(json_encode(["status" => "error", "message" => "função não definida."]));
+        break;
 }
 
 try {
