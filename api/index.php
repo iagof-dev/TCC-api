@@ -24,3 +24,4 @@ include_once("./api/generos/generos.php");
 include_once("./api/coordenadores/coordenadores.php");
 include_once("./api/avaliacoes/avaliacoes.php");
 include_once("./api/notificacoes/notificacoes.php");
+include_once("./api/geral/geral.php");
