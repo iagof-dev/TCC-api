@@ -3,7 +3,7 @@ $com = "";
 $message = "";
 
 switch ($action) {
-    case 'alterar':
+    case 'modificar':
         $id_livro = 0;
         $id_status = 0;
         //$rs = $db->prepare("");
