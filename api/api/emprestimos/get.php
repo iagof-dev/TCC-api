@@ -21,6 +21,8 @@ switch ($action) {
             case 'restituidos':
                 $rs = $db->prepare("SELECT lo.id, al.rm, lv.titulo, lo.data_aluguel, lo.data_devolucao, lo.id_status_livro FROM emprestimos as lo INNER JOIN livros as lv INNER JOIN alunos as al WHERE lo.id_livro = lv.id AND lo.rm_aluno = al.rm AND lo.id_status_livro=3;");
                 break;
+            case 'perdidos':
+                break;
             default:
                 $rs = $db->prepare("SELECT lo.id, al.rm, lv.titulo, lo.data_aluguel, lo.data_devolucao, lo.id_status_livro FROM emprestimos as lo INNER JOIN livros as lv INNER JOIN alunos as al WHERE lo.id_livro = lv.id AND lo.rm_aluno = al.rm;");
                 break;
