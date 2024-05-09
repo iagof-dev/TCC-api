@@ -16,7 +16,7 @@ switch ($action) {
             echo(json_encode(["status" => "error", "message" => "Informe o id do livro para consultar as avaliações dele."]));
             return;
         }
-        $rs = $db->prepare("SELECT av.id, al.nome,av.avaliacao FROM avaliacoes as av INNER JOIN alunos as al WHERE av.id_aluno=al.rm AND av.id_livro = $param;");
+        $rs = $db->prepare("SELECT av.id, al.nome,av.avaliacao FROM avaliacoes as av INNER JOIN alunos as al WHERE av.rm_aluno=al.rm AND av.id_livro = $param;");
         break;
 }
 
