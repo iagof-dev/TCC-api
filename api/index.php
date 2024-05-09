@@ -11,7 +11,7 @@ $method = $_SERVER['REQUEST_METHOD'];
 #Classes
 include_once("classes/db.php"); include_once("classes/secret.php"); include_once("classes/usuario.php");
 
-$db = (new DB())->connect("sgbe");
+$db = (new DB())->connect("tccapi");
 
 # API
 include_once("./api/cursos/cursos.php");
@@ -24,4 +24,3 @@ include_once("./api/generos/generos.php");
 include_once("./api/coordenadores/coordenadores.php");
 include_once("./api/avaliacoes/avaliacoes.php");
 include_once("./api/notificacoes/notificacoes.php");
-include_once("./api/geral/geral.php");

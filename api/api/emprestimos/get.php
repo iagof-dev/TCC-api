@@ -24,7 +24,7 @@ switch ($action) {
             case 'perdidos':
                 break;
             default:
-                $rs = $db->prepare("SELECT lo.id, al.rm, lv.titulo, lo.data_aluguel, lo.data_devolucao, lo.id_status_livro FROM emprestimos as lo INNER JOIN livros as lv INNER JOIN alunos as al WHERE lo.id_livro = lv.id AND lo.rm_aluno = al.rm;");
+                $rs = $db->prepare("SELECT lo.id, al.rm, lv.titulo, lo.data_aluguel, lo.data_devolucao, SL.estado FROM emprestimos as lo INNER JOIN livros as lv INNER JOIN alunos as al INNER JOIN estado_emprestimos as SL WHERE lo.id_livro = lv.id AND lo.rm_aluno = al.rm AND SL.id = lo.id_status_livro;");
                 break;
         }
         break;
