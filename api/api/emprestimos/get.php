@@ -1,5 +1,5 @@
 <?php
-$com = "";
+$com = "SELECT lo.id, al.rm, lv.titulo, at.autor,lo.data_aluguel, lo.data_devolucao, SL.estado FROM emprestimos as lo INNER JOIN livros as lv INNER JOIN alunos as al INNER JOIN estado_emprestimos as SL INNER JOIN autores as at WHERE lo.id_livro = lv.id AND lo.rm_aluno = al.rm AND SL.id = lo.id_status_livro AND lv.id_autor = at.id";
 $rs = "";
 
 switch ($action) {
@@ -7,30 +7,31 @@ switch ($action) {
         switch($param){
             case 'id':
             case 'rm':
-                $rs = $db->prepare("SELECT lo.id, al.rm, lv.titulo, lo.data_aluguel, lo.data_devolucao, lo.id_status_livro FROM emprestimos as lo INNER JOIN livros as lv INNER JOIN alunos as al WHERE lo.id_livro = lv.id AND lo.rm_aluno = al.rm AND al.rm=$param2;");
+                $com .= " AND al.rm=$param2;";
                 break;
             case 'livro':
-                $rs = $db->prepare("SELECT lo.id, al.rm, lv.titulo, lo.data_aluguel, lo.data_devolucao, lo.id_status_livro FROM emprestimos as lo INNER JOIN livros as lv INNER JOIN alunos as al WHERE lo.id_livro = lv.id AND lo.rm_aluno = al.rm AND lo.id_livro=$param2; ");
+                $com .= " AND lo.id_livro=$param2;";
                 break;
             case 'pendentes':
-                $rs = $db->prepare("SELECT lo.id, al.rm, lv.titulo, lo.data_aluguel, lo.data_devolucao, lo.id_status_livro FROM emprestimos as lo INNER JOIN livros as lv INNER JOIN alunos as al WHERE lo.id_livro = lv.id AND lo.rm_aluno = al.rm AND lo.id_status_livro=1;");
+                $com .= " AND lo.id_status_livro=1;";
                 break;    
             case 'atrasados':
-                $rs = $db->prepare("SELECT lo.id, al.rm, lv.titulo, lo.data_aluguel, lo.data_devolucao, lo.id_status_livro FROM emprestimos as lo INNER JOIN livros as lv INNER JOIN alunos as al WHERE lo.id_livro = lv.id AND lo.rm_aluno = al.rm AND lo.id_status_livro=2;");
+                $com .= " AND lo.id_status_livro=2;";
                 break;
             case 'restituidos':
-                $rs = $db->prepare("SELECT lo.id, al.rm, lv.titulo, lo.data_aluguel, lo.data_devolucao, lo.id_status_livro FROM emprestimos as lo INNER JOIN livros as lv INNER JOIN alunos as al WHERE lo.id_livro = lv.id AND lo.rm_aluno = al.rm AND lo.id_status_livro=3;");
+                $com .= " AND lo.id_status_livro=3;";
                 break;
             case 'perdidos':
                 break;
             default:
-                $rs = $db->prepare("SELECT lo.id, al.rm, lv.titulo, lo.data_aluguel, lo.data_devolucao, SL.estado FROM emprestimos as lo INNER JOIN livros as lv INNER JOIN alunos as al INNER JOIN estado_emprestimos as SL WHERE lo.id_livro = lv.id AND lo.rm_aluno = al.rm AND SL.id = lo.id_status_livro;");
+                $com .= ";";
                 break;
         }
         break;
         
 }
 
+$rs = $db->prepare($com);
 $rs->execute();
 $obj = $rs->fetchAll(PDO::FETCH_ASSOC);
 

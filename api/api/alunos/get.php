@@ -1,18 +1,20 @@
 <?php
-$com = "";
+$com = "SELECT al.rm, al.nome, al.telefone, c.ano, c.curso, c.periodo FROM alunos as al INNER JOIN cursos as c WHERE al.id_curso = c.id";
 $rs = "";
 
 switch ($action) {
     default:
-        $rs = $db->prepare("SELECT al.rm, al.nome, al.telefone, c.ano, c.curso, c.periodo FROM alunos as al INNER JOIN cursos as c WHERE al.id_curso = c.id;");
+        $com .= ";";
         break;
     case 'rm':
-        $rs = $db->prepare("SELECT al.rm, al.nome, al.telefone, c.ano, c.curso, c.periodo FROM alunos as al INNER JOIN cursos as c WHERE al.id_curso = c.id AND al.rm='$param';");
+        $com .= " AND al.rm='$param';";
         break;
     case 'telefone':
-        $rs = $db->prepare("SELECT al.rm, al.nome, al.telefone, c.ano, c.curso, c.periodo FROM alunos as al INNER JOIN cursos as c WHERE al.id_curso = c.id and al.telefone ='$param';");
+        $com .= " AND al.telefone ='$param';";
         break;
 }
+
+$rs = $db->prepare($com);
 
 try{
     $rs->execute();
