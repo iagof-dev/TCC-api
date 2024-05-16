@@ -1,5 +1,5 @@
 <?php
-$com = "SELECT lo.id, al.rm, lv.titulo, at.autor,lo.data_aluguel, lo.data_devolucao, SL.estado FROM emprestimos as lo INNER JOIN livros as lv INNER JOIN alunos as al INNER JOIN estado_emprestimos as SL INNER JOIN autores as at WHERE lo.id_livro = lv.id AND lo.rm_aluno = al.rm AND SL.id = lo.id_status_livro AND lv.id_autor = at.id";
+$com = "SELECT lo.id, al.rm, al.nome, lv.titulo, at.autor,lo.data_aluguel, lo.data_devolucao, SL.estado FROM emprestimos as lo INNER JOIN livros as lv INNER JOIN alunos as al INNER JOIN estado_emprestimos as SL INNER JOIN autores as at WHERE lo.id_livro = lv.id AND lo.rm_aluno = al.rm AND SL.id = lo.id_status_livro AND lv.id_autor = at.id";
 $rs = "";
 
 switch ($action) {
