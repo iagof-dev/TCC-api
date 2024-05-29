@@ -17,7 +17,6 @@ $db = (new DB())->connect("tccapi");
 include_once("./api/cursos/cursos.php");
 include_once("./api/alunos/alunos.php");
 include_once("./api/livros/livros.php");
-include_once("./api/livros_generos/livros_generos.php");
 include_once("./api/bibliotecarias/bibliotecarias.php");
 include_once("./api/emprestimos/emprestimos.php");
 include_once("./api/generos/generos.php");

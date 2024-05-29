@@ -30,11 +30,11 @@ switch ($action) {
             "messages" => array(
                 array(
                     "role" => "system",
-                    "content" => "Você é um escritor de sinopse brasileiro, você deverá criar uma sinopse detalhada sobre um livro que será especificado pelo usuário. sem sequências de escape ou formatação, deverá obedecer o usuário, fazer oque ele pedir."
+                    "content" => "Você é um escritor de sinopse brasileiro, você deverá criar uma sinopse detalhada sobre um livro que será especificado pelo usuário. sem sequências de escape ou formatação"
                 ),
                 array(
                     "role" => "user",
-                    "content" => "Crie uma sinopse de ". $postvalue['livro'] ." de ". $postvalue['autor'] ." com ". $postvalue['caracteres'] ." caracteres, sem palavras incompletas, tendo detalhes sobre a historia."
+                    "content" => "Crie uma sinopse de ". $postvalue['livro'] ." de ". $postvalue['autor'] ." com ". $postvalue['caracteres'] ." caracteres, sem palavra incompleta."
                 )
             )
         );
