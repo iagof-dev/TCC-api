@@ -27,3 +27,5 @@ include_once("./api/geral/geral.php");
 include_once("./api/estado_emprestimos/estado_emprestimos.php");
 include_once("./api/imagens/imagens.php");
 include_once("./api/sinopse/sinopse.php");
+include_once("./api/autores/autores.php");
+include_once("./api/editoras/editoras.php");
