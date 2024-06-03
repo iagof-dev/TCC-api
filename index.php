@@ -29,3 +29,4 @@ include_once("./api/imagens/imagens.php");
 include_once("./api/sinopse/sinopse.php");
 include_once("./api/autores/autores.php");
 include_once("./api/editoras/editoras.php");
+include_once("./api/generos_livros/generos_livros.php");

@@ -26,15 +26,15 @@ switch ($action) {
         
         $data = array(
             "model" => "gpt-3.5-unfiltered",
-            "max_tokens" => 100,
+            "max_tokens" => 500,
             "messages" => array(
                 array(
                     "role" => "system",
-                    "content" => "Você é um escritor de sinopse brasileiro, você deverá criar uma sinopse detalhada sobre um livro que será especificado pelo usuário. sem sequências de escape ou formatação"
+                    "content" => "Você é um escritor de sinopses para livros, da nacionalidade brasileiro, você deverá criar uma sinopse detalhada sobre um livro que será especificado pelo usuário. sem sequências de escape ou formatação, sem palavras incompletas, respeitando a quantidade de caracteres dado pelo o usuário, você deve dar detalhes sobre o livro dizendo os personagens, etc. você deve entregar sinopse com continuidade, sem frases sem continuidade"
                 ),
                 array(
                     "role" => "user",
-                    "content" => "Crie uma sinopse de ". $postvalue['livro'] ." de ". $postvalue['autor'] ." com ". $postvalue['caracteres'] ." caracteres, sem palavra incompleta."
+                    "content" => "Crie uma sinopse de ". $postvalue['livro'] ." de ". $postvalue['autor'] ." com ". $postvalue['caracteres'] ." caracteres."
                 )
             )
         );
