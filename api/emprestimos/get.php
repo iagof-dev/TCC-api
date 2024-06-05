@@ -14,15 +14,16 @@ switch ($action) {
                 $com .= " AND lo.id_livro=$param2;";
                 break;
             case 'pendentes':
-                $com .= " AND lo.id_status_livro=1;";
+                $com .= " AND lo.id_status_emprestimo=1;";
                 break;    
             case 'atrasados':
-                $com .= " AND lo.id_status_livro=2;";
+                $com .= " AND lo.id_status_emprestimo=2;";
                 break;
             case 'restituidos':
-                $com .= " AND lo.id_status_livro=3;";
+                $com .= " AND lo.id_status_emprestimo=3;";
                 break;
             case 'perdidos':
+                $com .= " AND lo.id_status_emprestimo=4;";
                 break;
             default:
                 $com .= ";";
