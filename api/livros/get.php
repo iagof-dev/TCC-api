@@ -1,5 +1,5 @@
 <?php
-$com = "SELECT l.id, l.codigo, l.titulo, l.capa, l.sinopse, a.autor, e.editora, g.genero, COALESCE(AVG(rt.avaliacao), 0) as avaliacao FROM livros as l INNER JOIN autores as a ON l.id_autor = a.id INNER JOIN editoras as e ON l.id_editora = e.id INNER JOIN generos_livros as lg ON lg.id_livro = l.id INNER JOIN generos as g ON lg.id_genero = g.id LEFT JOIN avaliacoes as rt ON rt.id_livro = l.id GROUP BY l.id, l.codigo, l.titulo, l.capa, a.autor, e.editora, g.genero";
+$com = "SELECT l.id, l.codigo, l.titulo, l.capa, l.sinopse, l.volumes, a.autor, e.editora, g.genero, COALESCE(AVG(rt.avaliacao), 0) as avaliacao FROM livros as l INNER JOIN autores as a ON l.id_autor = a.id INNER JOIN editoras as e ON l.id_editora = e.id INNER JOIN generos_livros as lg ON lg.id_livro = l.id INNER JOIN generos as g ON lg.id_genero = g.id LEFT JOIN avaliacoes as rt ON rt.id_livro = l.id GROUP BY l.id, l.codigo, l.titulo, l.capa, a.autor, e.editora, g.genero";
 $rs = "";
 
 
