@@ -15,18 +15,4 @@ switch ($action) {
         $rs = $db->prepare("SELECT av.id, al.nome,av.avaliacao FROM avaliacoes as av INNER JOIN alunos as al WHERE av.rm_aluno=al.rm;");
         break;
 }
-
-try{
-    $rs->execute();
-    $obj = $rs->fetchAll(PDO::FETCH_ASSOC);
-    if(empty($obj)){
-        echo json_encode(["status" => "error","DATA" => "Nenhum dado não encontrado!"]);
-    }
-    else{
-        echo json_encode(["status" => "success","DATA" => $obj]);
-    }
-}
-catch(Exception $e){
-    echo($e->getMessage());
-    die();
-}
+echo((new DB())->query($com));

@@ -33,14 +33,4 @@ switch ($action) {
         
 }
 
-$rs = $db->prepare($com);
-$rs->execute();
-$obj = $rs->fetchAll(PDO::FETCH_ASSOC);
-
-
-if(empty($obj)){
-    echo json_encode(["status" => "error","DATA" => "Nenhum dado registrado!"]);
-}
-else{
-    echo json_encode(["status" => "success","DATA" => $obj]);
-}
+echo((new DB())->query($com));

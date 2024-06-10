@@ -8,12 +8,12 @@ if (isset($_GET['path']) && $_GET['path'] !== "") { $path = explode("/", $_GET['
 
 $method = $_SERVER['REQUEST_METHOD'];
 
-#Classes
-include_once("classes/db.php"); include_once("classes/secret.php"); include_once("classes/usuario.php");
+//  Classes
+include_once("classes/secret.php");include_once("classes/db.php");include_once("classes/usuario.php");
 
-$db = (new DB())->connect("tccapi");
+$db = (new DB());
 
-# API
+//  API
 include_once("./api/cursos/cursos.php");
 include_once("./api/alunos/alunos.php");
 include_once("./api/livros/livros.php");

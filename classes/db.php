@@ -1,33 +1,58 @@
 <?php
+require_once(__DIR__ . "/secret.php");
 class DB
 {
-
-    private $host;
-    private $port;
-    private $user;
-    private $pass;
     private $db;
-
 
     function __construct()
     {
-        require_once(__DIR__ . "/secret.php");
-        $config = new config();
-        $config_info = $config->get();
-        $this->host = $config_info['db_ip'];
-        $this->port = $config_info['db_port'];
-        $this->user = $config_info['db_user'];
-        $this->pass = $config_info['db_pass'];
+        if(!$this->isConnected()){
+            $config_info = (new config())->get();
+            $this->db = new PDO("mysql:host=". $config_info['db_ip'] .":". $config_info['db_port'] .";dbname=".$config_info['db_name'].";charset=UTF8", $config_info['db_user'], $config_info['db_pass']);
+        }        
     }
 
 
-    function connect($database)
+    function isConnected(){
+        if (isset($this->db) && $this->db instanceof PDO) {
+            return true;
+        }
+        return false;
+    }
+
+
+    function getConnection()
     {
-        return new PDO("mysql:host={$this->host}:{$this->port};dbname={$database};charset=UTF8", $this->user, $this->pass);
+        return $this->db;
     }
 
-    function createLog($who, $victim, $action){
 
+    function query($sql)
+    {
+        try {
+            $rs = $this->getConnection()->prepare($sql);
+            $rs->execute();
+            $obj = $rs->fetchAll(PDO::FETCH_ASSOC);
+            if (empty($obj)) {
+                return json_encode(["status" => "error", "DATA" => "Dado não encontrado."]);
+            } else {
+                return json_encode(["status" => "success", "DATA" => $obj]);
+            }
+        } catch (PDOException $e) {
+            return (json_encode(["status" => "error", "message" => $e->getMessage()]));
+        }
     }
 
+    function insert($sql)
+    {
+        try {
+            $rs = $this->getConnection()->prepare($sql);
+            $rs->execute();
+            $numRowsAffected = $rs->rowCount();
+            return ['status' => 'success', 'message' => 'Registro inserido com sucesso', 'rows' => $numRowsAffected];
+
+        } catch (PDOException $ex) {
+            return ['status'=> 'error', 'message' => $ex->getMessage()];
+        }
+    }
 }

@@ -8,19 +8,4 @@ switch ($action) {
         break;
 }
 
-try{
-    $rs->execute();
-    $obj = $rs->fetchAll(PDO::FETCH_ASSOC);
-
-
-    if(empty($obj)){
-        echo json_encode(["status" => "error","DATA" => "sem dados encontrado"]);
-    }
-    else{
-        echo json_encode(["status" => "success","DATA" => $obj]);
-    }
-}
-catch(Exception $e){
-    echo($e->getMessage());
-    die();
-}
+echo((new DB())->query($com));

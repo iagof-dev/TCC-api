@@ -1,6 +1,5 @@
 <?php
 $com = "";
-$rs = "";
 
 switch ($action) {
     default:
@@ -19,13 +18,4 @@ switch ($action) {
         break;
 }
 
-$rs->execute();
-$obj = $rs->fetchAll(PDO::FETCH_ASSOC);
-
-
-if(empty($obj)){
-    echo json_encode(["status" => "error","DATA" => "informacão não encontrada/inexistente."]);
-}
-else{
-    echo json_encode(["status" => "success","DATA" => $obj]);
-}
+echo((new DB())->query($com));
