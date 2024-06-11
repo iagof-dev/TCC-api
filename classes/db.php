@@ -49,10 +49,10 @@ class DB
             $rs = $this->getConnection()->prepare($sql);
             $rs->execute();
             $numRowsAffected = $rs->rowCount();
-            return ['status' => 'success', 'message' => 'Registro inserido com sucesso', 'rows' => $numRowsAffected];
+            return json_encode(['status' => 'success', 'message' => 'Registro inserido com sucesso', 'rows' => $numRowsAffected]);
 
         } catch (PDOException $ex) {
-            return ['status'=> 'error', 'message' => $ex->getMessage()];
+            return json_encode(['status'=> 'error', 'message' => $ex->getMessage()]);
         }
     }
 }

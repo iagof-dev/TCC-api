@@ -1,10 +1,9 @@
 <?php
 $com = "";
-$rs = "";
 
 switch ($action) {
     default:
-        $rs = $db->prepare("SELECT * FROM bibliotecarias;");
+        $com = "SELECT * FROM bibliotecarias;";
         break;
 }
 

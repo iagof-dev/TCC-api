@@ -59,8 +59,11 @@ switch ($action) {
             echo(json_encode(["status" => "error", "message" => "Houve erro na comunicação com API.", "details" => var_dump($error)]));
             die();
         }
-        
         $responseData = json_decode($response, true);
+		if($responseData['status']== false){
+			echo (json_encode(['status' => 'error', 'message' => 'Houve um erro na resposta da API (openai-3.5-gpt-unfiltered)', 'total-used-tokens' => 0]));
+			die();
+		}
 
         echo(json_encode(['status' => 'success', 'message' => $responseData['choices']['0']['message']['content'], 'total-used-tokens' => $responseData['usage']['total_tokens']]));
 

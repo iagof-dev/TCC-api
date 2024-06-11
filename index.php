@@ -13,7 +13,7 @@ include_once("classes/secret.php");include_once("classes/db.php");include_once("
 
 $db = (new DB());
 
-//  ROUTES
+//  API
 include_once("./api/cursos/cursos.php");
 include_once("./api/alunos/alunos.php");
 include_once("./api/livros/livros.php");
