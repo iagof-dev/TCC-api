@@ -5,7 +5,7 @@ $message = "";
 switch ($action) {
     case 'adicionar':
 
-        $verify = ["autor" => false];
+        $verify = ["nome" => false];
         
         $com = "INSERT INTO autores (";
         foreach (array_keys($_POST) as $key) {

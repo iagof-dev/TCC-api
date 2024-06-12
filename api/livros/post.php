@@ -14,9 +14,11 @@ switch ($action) {
                 $verify[$key] = true;
                 $com .= $key . ",";
             }
-            else{ echo(json_encode(["status" => "error", "message" => "um parâmetro inexistente foi enviado na requisição."])); die(); }
+            else{ echo(json_encode(["status" => "error", "message" => "um parâmetro inexistente foi enviado na requisição. (". $key .")"])); die(); }
         }
-        if (array_search(false, array_values($verify)) !== false) { echo(json_encode(["status" => "error", "message" => "um parâmetro obrigatório está faltando."])); die(); }
+		$validParameters = array_search(false, array_values($verify));
+		$keys = array_keys($verify);
+        if ($validParameters !== false) { echo(json_encode(["status" => "error", "message" => "um parâmetro obrigatório está faltando. (" . $keys[$validParameters]. ")"])); die(); }
 
 
         $com = substr_replace($com, "", -1) . ") values (";
