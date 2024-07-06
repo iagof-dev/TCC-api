@@ -39,10 +39,6 @@ switch ($action) {
             $com .= "'" . $value . "',";
         }
         $com = substr_replace($com, "", -1) . ");";
-
-		echo($com);
-		die();
-
 		break;
 }
 

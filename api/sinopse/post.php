@@ -22,46 +22,46 @@ switch ($action) {
             die();
         }
 
-        $url = 'https://api.pawan.krd/v1/chat/completions';
-        
-        $data = array(
-            "model" => "gpt-3.5-unfiltered",
-            "max_tokens" => 500,
-            "messages" => array(
-                array(
-                    "role" => "system",
-                    "content" => "Você é um escritor de sinopses para livros, da nacionalidade brasileiro, você deverá criar uma sinopse detalhada sobre um livro que será especificado pelo usuário. sem sequências de escape ou formatação, sem palavras incompletas, respeitando a quantidade de caracteres dado pelo o usuário, você deve dar detalhes sobre o livro dizendo os personagens, etc. você deve entregar sinopse com continuidade, sem frases sem continuidade"
-                ),
-                array(
-                    "role" => "user",
-                    "content" => "Crie uma sinopse de ". $postvalue['livro'] ." de ". $postvalue['autor'] ." com ". $postvalue['caracteres'] ." caracteres."
-                )
-            )
-        );
-        
-        $payload = json_encode($data);
-        
-        $ch = curl_init($url);
-        
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-            'Authorization: Bearer pk-lYaBGeQVLbPxOJkuPbKvrLtXTDFwsgkxvQqRGnZKXBTjWvFT',
-            'Content-Type: application/json'
-        ));
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
-        
-        $response = curl_exec($ch);
-        
+       $url = 'https://api.pawan.krd/v1/chat/completions';
+		$headers = [
+			'Authorization: Bearer pk-lYaBGeQVLbPxOJkuPbKvrLtXTDFwsgkxvQqRGnZKXBTjWvFT',
+			'Content-Type: application/json',
+		];
+		$data = [
+			"model" => "gpt-3.5-unfiltered",
+			"max_tokens" => 1000,
+			"messages" => [
+				[
+					"role" => "system",
+					"content" => "Você é um escritor de sinopses para livros, da nacionalidade brasileiro, você deverá criar uma sinopse detalhada sobre um livro que será especificado pelo usuário. sem sequências de escape ou formatação, sem palavras incompletas, respeitando a quantidade de caracteres dado pelo o usuário, você deve dar detalhes sobre o livro dizendo os personagens, etc. você deve entregar sinopse com continuidade, sem frases sem continuidade"
+				],
+				[
+					"role" => "user",
+					"content" => "Crie uma sinopse de ". $postvalue['livro'] ." de ". $postvalue['autor'] ." com ". $postvalue['caracteres'] ." caracteres."
+				]
+			]
+		];
+
+		$ch = curl_init($url);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+		curl_setopt($ch, CURLOPT_POST, true);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+
+		$response = curl_exec($ch);
+		curl_close($ch);
+		
+
         if ($response === false) {
             $error = curl_error($ch);
             curl_close($ch);
-            echo(json_encode(["status" => "error", "message" => "Houve erro na comunicação com API.", "details" => var_dump($error)]));
+            echo(json_encode(["status" => "error", "message" => "Houve erro na comunicação com API.", "details" => $error]));
             die();
         }
         $responseData = json_decode($response, true);
-		if($responseData['status']== false){
-			echo (json_encode(['status' => 'error', 'message' => 'Houve um erro na resposta da API (openai-3.5-gpt-unfiltered)', 'total-used-tokens' => 0]));
+		
+		if(isset($responseData['status']) && $responseData['status']== false){
+			echo (json_encode(['status' => 'error', 'message' => 'Houve um erro na resposta da API (openai-3.5-gpt-turbo)', 'total-used-tokens' => 0]));
 			die();
 		}
 
