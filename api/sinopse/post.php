@@ -59,10 +59,6 @@ switch ($action) {
             die();
         }
         $responseData = json_decode($response, true);
-<<<<<<< HEAD
-		
-=======
->>>>>>> 56a5dd828c9ad9a661d982377f8503d7d46935df
 		if(isset($responseData['status']) && $responseData['status']== false){
 			echo (json_encode(['status' => 'error', 'message' => 'Houve um erro na resposta da API (openai-3.5-gpt-turbo)', 'total-used-tokens' => 0]));
 			die();
