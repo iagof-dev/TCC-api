@@ -27,8 +27,7 @@ switch ($action) {
 		$com = "SELECT codigo FROM livros;";
 		break;
     default:
-		echo(json_enconde(['status' => 'error', 'message' => 'Defina um parâmetro de busca.']));
+		echo(json_encode(['status' => 'error', 'message' => 'Defina um parâmetro de busca.']));
 		die();
-        break;
 }
 echo((new DB())->query($com));
