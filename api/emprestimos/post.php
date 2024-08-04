@@ -57,7 +57,8 @@ switch ($action) {
 
         $com = rtrim($com, ",") . ") " . rtrim($valuesPart, ",") . ")";
 
-        $com .= "; INSERT INTO avaliacoes values (default, '". $temp_value['id_livro'] ."', '". $temp_value['rm'] ."', 0);";
+        $com .= "; INSERT INTO avaliacoes values (default, LAST_INSERT_ID(),'". $temp_value['id_livro'] ."', '". $temp_value['rm'] ."', -1);";
+
         break;
 }
 
