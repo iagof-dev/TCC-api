@@ -4,23 +4,33 @@ $message = "";
 
 switch ($action) {
     case 'modificar':
-        // $id_livro = 0;
-        // $id_status = 0;
-        // //$rs = $db->prepare("");
-        // $com = "UPDATE emprestimos set id_status_livro=";
-        // foreach ($_POST as $key => $value) {
-        //     if($key == 'id_livro'){
-        //         $id_livro = $value;
-        //     }
-        //     if($key == 'status'){
-        //         $id_status = $value;
-        //     }
-        // }
-        // $com .= $id_status;
-        // $com .= " WHERE id_livro=" . $id_livro . ";";
-        echo(json_encode(["status" => "error", "message" => "Código ruim, não implementado."]));
-        die();
+        $verify = ["id" => false, "id_status_emprestimo" => false];
+        
+        $com = "UPDATE emprestimos SET ";
+        $setClauses = [];
+        
+        foreach ($_POST as $key => $value) {
+            if (array_key_exists($key, $verify)) {
+                $verify[$key] = true;
+                if ($key !== 'id') {
+                    $setClauses[] = "$key = '" . addslashes($value) . "'";
+                }
+            } else {
+                echo(json_encode(["status" => "error", "message" => "Um parâmetro inexistente foi enviado na requisição."]));
+                die();
+            }
+        }
+        
+        if (in_array(false, $verify)) {
+            echo(json_encode(["status" => "error", "message" => "Um parâmetro obrigatório está faltando."]));
+            die();
+        }
+        
+        $com .= implode(', ', $setClauses);
+        $com .= ' WHERE id=' . intval($_POST['id']) . ';';
+        
         break;
+
 	case 'registrar':
         $verify = ["rm" => false,"id_bibliotecaria" => false,"id_livro" => false, "data_aluguel"=> false, "id_status_emprestimo" => false, "prazo" => false];
         

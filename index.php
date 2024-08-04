@@ -13,22 +13,6 @@ include_once("classes/secret.php");include_once("classes/db.php");include_once("
 
 $db = (new DB());
 
-// if($_POST){
-// 	$client = new cliente();
-// 	if(!($client->checkPermission()))
-//     {
-//         echo(json_encode(["status" => "error", "message" => "Sem permissão!"]));
-//         die();
-//     }
-//     if (empty($_POST)) {
-//         echo (json_encode(["status" => "error", "message" => "Nenhum argumento foi passado"]));
-//         die();
-//     }
-// 	$client->setLibrarianID($_POST['librarianID']);
-// 	unset($_POST['librarianID']);	
-// }
-
-
 //  API
 include_once("./api/cursos/cursos.php");
 include_once("./api/alunos/alunos.php");
