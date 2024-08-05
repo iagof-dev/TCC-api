@@ -29,6 +29,22 @@ switch ($action) {
         $com .= implode(', ', $setClauses);
         $com .= ' WHERE id=' . intval($_POST['id']) . ';';
 
+        $sql_temp = 'SELECT * FROM estado_emprestimos where ID="'. $_POST['id_status_emprestimo'] .'";';
+
+        $estado_emprestimos = json_decode((new DB())->query($sql_temp), true);
+        if($estado_emprestimos['status'] != 'success'){
+            echo(json_encode(['status' => 'error', 'message' => 'Estado de emprestimo não encontrado']));
+            die();
+        }
+
+       
+        if($estado_emprestimos['DATA']['0']['estado'] == 'devolvido'){
+            $sql_temp2 = 'SELECT lv.id as id_livro, lv.volumes_reservado FROM emprestimos AS lo INNER JOIN livros lv WHERE lv.id = lo.id_livro AND lo.id = '. $_POST['id'] .';';
+            $livros_data = json_decode((new DB())->query($sql_temp2),true);
+            $updated_value = $livros_data['DATA']['0']['volumes_reservado'] - 1;
+            $com .= 'UPDATE livros SET volumes_reservado='. $updated_value . ' WHERE id=' . $livros_data['DATA']['0']['id_livro'] . ';';
+        }
+
         break;
 
     case 'registrar':
