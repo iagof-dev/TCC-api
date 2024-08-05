@@ -56,9 +56,23 @@ switch ($action) {
         }
 
         $com = rtrim($com, ",") . ") " . rtrim($valuesPart, ",") . ")";
-
         $com .= "; INSERT INTO avaliacoes values (default, LAST_INSERT_ID(),'". $temp_value['id_livro'] ."', '". $temp_value['rm'] ."', -1);";
 
+        $verify_book = 'SELECT * FROM livros where id=' . $temp_value['id_livro'] . ';';
+        $verify_data = json_decode((new DB())->query($verify_book), true);
+
+        if($verify_data['status'] != 'success'){
+            echo(json_encode(['status' => 'error', 'message' => 'Livro não encontrado']));
+            die();
+        }
+
+        if($verify_data['DATA']['0']['volumes_reservado'] == $verify_data['DATA']['0']['volumes']){
+            echo(json_encode(['status' => 'error', 'message' => 'Não há livros disponiveis']));
+            die();
+        }
+
+        $new_value = $verify_data['DATA']['0']['volumes_reservado'] + 1;
+        $com .= " UPDATE livros SET volumes_reservado = " . $new_value . " where ID=". $temp_value['id_livro'] . ";";
         break;
     case 'estender':
         if(empty($_POST['novo_prazo']) || empty($_POST['id_emprestimo'])){
@@ -66,7 +80,7 @@ switch ($action) {
             die();
         }
 
-        if($_POST['novo_prazo'] != 7 && $_POST['novo_prazo'] != 14){
+        if($_POST['novo_prazo'] != 14){
             echo(json_encode(['status' => 'error', 'message' => 'Você não pode estender para ' . $_POST['novo_prazo'] . ' apenas poderá aumentar para 7 ou 14 dias.']));
             die();
         }
