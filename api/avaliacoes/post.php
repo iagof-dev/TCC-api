@@ -3,6 +3,9 @@ $com = "";
 $message = "";
 
 switch ($action) {
+    case 'criar':
+        echo(json_encode(['status' => 'error', 'message' => 'Método removido.']));
+        die();
     case 'modificar':
         $verify = ['id' => false, 'avaliacao' => false];
         $com = "UPDATE avaliacoes SET ";
