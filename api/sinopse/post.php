@@ -28,7 +28,7 @@ switch ($action) {
 			'Content-Type: application/json',
 		];
 		$data = [
-			"model" => "gpt-3.5-unfiltered",
+			"model" => "pai-001",
 			"max_tokens" => 1000,
 			"messages" => [
 				[
