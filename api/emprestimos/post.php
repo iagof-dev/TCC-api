@@ -60,6 +60,31 @@ switch ($action) {
         $com .= "; INSERT INTO avaliacoes values (default, LAST_INSERT_ID(),'". $temp_value['id_livro'] ."', '". $temp_value['rm'] ."', -1);";
 
         break;
+    case 'estender':
+        if(empty($_POST['novo_prazo']) || empty($_POST['id_emprestimo'])){
+            echo(json_encode(['status' => 'error', 'message' => 'Está faltando paramêtros necessários para concluir.']));
+            die();
+        }
+
+        if($_POST['novo_prazo'] != 7 && $_POST['novo_prazo'] != 14){
+            echo(json_encode(['status' => 'error', 'message' => 'Você não pode estender para ' . $_POST['novo_prazo'] . ' apenas poderá aumentar para 7 ou 14 dias.']));
+            die();
+        }
+
+        $verification = 'SELECT * FROM emprestimos WHERE id=' . $_POST['id_emprestimo'] . ';';
+        $isRenovavel = json_decode((new DB())->query($verification), true);
+        if($isRenovavel['status'] != 'success'){
+            echo(json_encode(['status' => 'error', 'message' => 'emprestimo não existe/encontrado.']));
+            die();
+        }
+        
+        if($isRenovavel['DATA']['0']['renovacao'] != 1){
+            echo(json_encode(['status' => 'error', 'message' => 'Este emprestimo não é renovavel, necessita devolver.']));
+            die();
+        }
+
+        $com = "UPDATE emprestimos SET prazo=". ($isRenovavel['DATA']['0']['prazo'] + $_POST['novo_prazo']) . ', renovacao=0 WHERE id=' . $_POST['id_emprestimo'] . ';';
+        break;
 }
 
 echo ((new DB())->insert($com));
