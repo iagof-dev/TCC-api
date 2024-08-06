@@ -3,8 +3,9 @@ $com = "";
 $rs = "";
 
 switch ($action) {
+    default:
     case 'listar':
-        $rs = $db->prepare("select * from coordenadores;");
+        $com = "select * from coordenadores;";
         break;
 }
 
