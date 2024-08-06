@@ -4,7 +4,7 @@ $rs = "";
 
 switch ($action) {
     case 'listar':
-        $rs = $db->prepare("select * from cursos;");
+        $com = "select * from cursos;";
         break;
 }
 
