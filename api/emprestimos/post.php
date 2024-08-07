@@ -93,8 +93,8 @@ switch ($action) {
             die();
         }
 
-        if($_POST['novo_prazo'] != 14 || $_POST['novo_prazo'] != 21){
-            echo(json_encode(['status' => 'error', 'message' => 'Você não pode estender para ' . $_POST['novo_prazo'] . ' apenas poderá aumentar para 14 ou 21 dias.']));
+        if($_POST['novo_prazo'] != 14){
+            echo(json_encode(['status' => 'error', 'message' => 'Você não pode estender para ' . $_POST['novo_prazo'] . ' apenas poderá aumentar para 14.']));
             die();
         }
 
