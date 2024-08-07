@@ -93,7 +93,7 @@ switch ($action) {
             die();
         }
 
-        if($_POST['novo_prazo'] != 14){
+        if($_POST['novo_prazo'] != 14 || $_POST['novo_prazo'] != 21){
             echo(json_encode(['status' => 'error', 'message' => 'Você não pode estender para ' . $_POST['novo_prazo'] . ' apenas poderá aumentar para 14 ou 21 dias.']));
             die();
         }
@@ -104,7 +104,7 @@ switch ($action) {
             echo(json_encode(['status' => 'error', 'message' => 'emprestimo não existe/encontrado.']));
             die();
         }
-        
+
         if($isRenovavel['DATA']['0']['renovacao'] != 1){
             echo(json_encode(['status' => 'error', 'message' => 'Este emprestimo não é renovavel, necessita devolver.']));
             die();
