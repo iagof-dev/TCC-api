@@ -68,6 +68,11 @@ switch ($action) {
             die();
         }
 
+        if($temp_value['data_aluguel'] == '0000-00-00'){
+            echo(json_encode(['status' => 'error', 'message' => 'Data de Aluguel Inválida.']));
+            die();
+        }
+
         $com = rtrim($com, ",") . ") " . rtrim($valuesPart, ",") . ")";
         $com .= "; INSERT INTO avaliacoes values (default, LAST_INSERT_ID(),'". $temp_value['id_livro'] ."', '". $temp_value['rm'] ."', -1);";
 
