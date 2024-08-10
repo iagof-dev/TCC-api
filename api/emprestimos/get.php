@@ -17,7 +17,7 @@ switch ($action) {
                 $com .= " AND lo.id_status_emprestimo=$param2;";
                 break;    
             default:
-                $com .= " ORDER BY lo.data_aluguel DESC, lo.id DESC;";
+                $com .= " ORDER BY CASE WHEN lo.id_status_emprestimo IN (1, 2) THEN 0 ELSE 1 END, lo.data_aluguel DESC, lo.id DESC;";
                 break;
         }
         break;
