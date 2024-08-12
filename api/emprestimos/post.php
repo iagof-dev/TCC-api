@@ -68,7 +68,7 @@ switch ($action) {
             die();
         }
 
-        if($temp_value['data_aluguel'] == '0000-00-00'){
+        if($temp_value['data_aluguel'] == '0000-00-00' || empty($temp_value['data_aluguel'])){
             echo(json_encode(['status' => 'error', 'message' => 'Data de Aluguel Inválida.']));
             die();
         }
