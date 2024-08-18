@@ -22,35 +22,23 @@ switch ($action) {
             die();
         }
 
-       $url = 'https://api.pawan.krd/v1/chat/completions';
-		$headers = [
-			'Authorization: Bearer pk-lYaBGeQVLbPxOJkuPbKvrLtXTDFwsgkxvQqRGnZKXBTjWvFT',
-			'Content-Type: application/json',
-		];
-		$data = [
-			"model" => "pai-001",
-			"max_tokens" => 1000,
-			"messages" => [
-				[
-					"role" => "system",
-					"content" => "Você é um escritor de sinopses para livros, da nacionalidade brasileiro, você deverá criar uma sinopse detalhada sobre um livro que será especificado pelo usuário. sem sequências de escape ou formatação, sem palavras incompletas, respeitando a quantidade de caracteres dado pelo o usuário, você deve dar detalhes sobre o livro dizendo os personagens, etc. você deve entregar sinopse com continuidade, sem frases sem continuidade"
-				],
-				[
-					"role" => "user",
-					"content" => "Crie uma sinopse de ". $postvalue['livro'] ." de ". $postvalue['autor'] ." com ". $postvalue['caracteres'] ." caracteres."
-				]
-			]
-		];
-
+		$gemini_api_key = "AIzaSyACpODdQcmGzh8tohEozvlpG722cw50NGg";
+		$ai_model = "gemini-1.5-flash-latest";
+		$url = 'https://generativelanguage.googleapis.com/v1beta/models/'. $ai_model .':generateContent?key=' . $gemini_api_key;
+		$headers = ['Content-Type: application/json'];
+		
+		$data = [ "contents" => [ [ "parts" => [ [ "text" => "Você é um escritor de sinopses para livros, da nacionalidade brasileiro, você deverá criar uma sinopse detalhada sobre um livro que será especificado pelo usuário. sem sequências de escape ou formatação, sem palavras incompletas, respeitando a quantidade de caracteres dado pelo o usuário, você deve dar detalhes sobre o livro dizendo os personagens, etc. você deve entregar sinopse com continuidade, sem frases sem continuidade; Crie uma sinopse de '". $postvalue['livro'] ."' do autor '". $postvalue['autor'] ."' com ". $postvalue['caracteres'] ." caracteres." ] ] ] ] ];
+		
 		$ch = curl_init($url);
+		
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 		curl_setopt($ch, CURLOPT_POST, true);
 		curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
-
-		$response = curl_exec($ch);
-		curl_close($ch);
 		
+		$response = curl_exec($ch);
+
+		$responseData = json_decode($response, true);
 
         if ($response === false) {
             $error = curl_error($ch);
@@ -58,13 +46,12 @@ switch ($action) {
             echo(json_encode(["status" => "error", "message" => "Houve erro na comunicação com API.", "details" => $error]));
             die();
         }
-        $responseData = json_decode($response, true);
-		if(isset($responseData['status']) && $responseData['status']== false){
-			echo (json_encode(['status' => 'error', 'message' => 'Houve um erro na resposta da API (openai-3.5-gpt-turbo)', 'total-used-tokens' => 0]));
+		if(!empty($responseData["error"])){
+			echo (json_encode(['status' => 'error', 'message' => 'Houve um erro na resposta da API ('. $ai_model .')', 'total-used-tokens' => 0]));
 			die();
 		}
 
-        echo(json_encode(['status' => 'success', 'message' => $responseData['choices']['0']['message']['content'], 'total-used-tokens' => $responseData['usage']['total_tokens']]));
+        echo(json_encode(['status' => 'success','message' => $responseData['candidates']['0']['content']['parts']['0']['text'], 'index' => $responseData['candidates']['0']['index'],'total-used-tokens' => $responseData['usageMetadata']['totalTokenCount']]));
 
 
         curl_close($ch);
