@@ -51,7 +51,7 @@ switch ($action) {
 			die();
 		}
 
-        echo(json_encode(['status' => 'success','message' => $responseData['candidates']['0']['content']['parts']['0']['text'], 'index' => $responseData['candidates']['0']['index'],'total-used-tokens' => $responseData['usageMetadata']['totalTokenCount']]));
+        echo(json_encode(['status' => 'success', 'ai_model' => $ai_model, 'message' => $responseData['candidates']['0']['content']['parts']['0']['text'], 'index' => $responseData['candidates']['0']['index'],'total-used-tokens' => $responseData['usageMetadata']['totalTokenCount']]));
 
 
         curl_close($ch);
