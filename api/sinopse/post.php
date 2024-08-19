@@ -22,6 +22,7 @@ switch ($action) {
             die();
         }
 
+        gerar:
 		$gemini_api_key = "AIzaSyACpODdQcmGzh8tohEozvlpG722cw50NGg";
 		$ai_model = "gemini-1.5-flash-latest";
 		$url = 'https://generativelanguage.googleapis.com/v1beta/models/'. $ai_model .':generateContent?key=' . $gemini_api_key;
@@ -39,6 +40,11 @@ switch ($action) {
 		$response = curl_exec($ch);
 
 		$responseData = json_decode($response, true);
+
+
+        if(!isset($responseData['candidates']['0']['content'])){
+            goto gerar;
+        }
 
         if ($response === false) {
             $error = curl_error($ch);
