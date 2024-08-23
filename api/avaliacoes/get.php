@@ -13,7 +13,7 @@ switch ($action) {
         break;
     case 'listar':
     default:
-        $com = ("SELECT av.id, al.nome,av.avaliacao FROM avaliacoes as av LEFT JOIN alunos as al where al.rm =av.rm_aluno;");
+        $com = ("SELECT av.id, al.nome,av.avaliacao FROM avaliacoes as av LEFT JOIN alunos as al ON al.rm =av.rm_aluno;");
         break;
 }
 
