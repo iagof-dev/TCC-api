@@ -45,10 +45,10 @@ class cliente
 	// ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
 	
 	function getLibrarianID(){
-		return $this->librarianID;	
+		return $this->$librarianID;	
 	}
 	function setLibrarianID($value){
-		$this->librarianID = $value;
+		$this->$librarianID = $value;
 	}
 	
 	

@@ -1,5 +1,5 @@
 <?php
-$com = "SELECT al.rm, al.nome, al.telefone, c.id as id_curso, c.ano, c.curso, c.periodo FROM alunos as al INNER JOIN cursos as c WHERE al.id_curso = c.id";
+$com = "SELECT al.rm, al.nome, al.telefone, c.id as id_curso, c.ano, c.curso, c.periodo FROM alunos as al LEFT JOIN cursos as c WHERE al.id_curso = c.id";
 
 switch ($action) {
     default:
