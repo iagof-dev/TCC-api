@@ -5,11 +5,11 @@ $rs = "";
 
 switch ($action) {
     case 'media':
-        if($param == null){
+        if(@$param == null){
             echo(json_encode(["status" => "error", "message" => "Informe o id do livro para consultar a média."]));
             return;
         }
-        $com = ("SELECT COUNT(avaliacao) as avaliadores, AVG(avaliacao) as nota FROM avaliacoes WHERE id_livro = $param;");
+        $com = ("SELECT COUNT(avaliacao) as avaliadores, AVG(avaliacao) as nota FROM avaliacoes WHERE id_livro = @$param;");
         break;
     case 'listar':
     default:

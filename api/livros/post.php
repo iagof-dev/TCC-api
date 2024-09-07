@@ -53,7 +53,7 @@ switch ($action) {
     case 'deletar':
         $ready = false;
         $com = "delete from livros where ";
-        switch($param){
+        switch(@$param){
             case 'codigo':
                 foreach (array_combine(array_keys($_POST), array_values($_POST)) as $key => $value) {
                     if (strtolower($key) == 'codigo') {

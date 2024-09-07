@@ -6,10 +6,10 @@ switch ($action) {
         $com .= ";";
         break;
     case 'rm':
-        $com .= " WHERE al.rm='$param';";
+        $com .= " WHERE al.rm='@$param';";
         break;
     case 'telefone':
-        $com .= " AND al.telefone ='$param';";
+        $com .= " AND al.telefone ='@$param';";
         break;
 }
 

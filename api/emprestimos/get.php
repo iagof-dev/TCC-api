@@ -10,16 +10,16 @@ $com = "SELECT lo.id, al.rm AS aluno_rm, al.nome AS aluno_nome, al.telefone AS a
 
 switch ($action) {
     case 'listar':
-        switch($param){
+        switch(@$param){
             case 'id':
             case 'rm':
-                $com .= " WHERE al.rm = $param2";
+                $com .= " WHERE al.rm = @$param2";
                 break;
             case 'livro':
-                $com .= " WHERE lo.id_livro = $param2";
+                $com .= " WHERE lo.id_livro = @$param2";
                 break;
             case 'status':
-                $com .= " WHERE lo.id_status_emprestimo = $param2";
+                $com .= " WHERE lo.id_status_emprestimo = @$param2";
                 break;    
             default:
                 $com .= " ORDER BY CASE WHEN lo.id_status_emprestimo IN (1, 2) THEN 0 ELSE 1 END, lo.data_aluguel DESC, lo.id DESC";
