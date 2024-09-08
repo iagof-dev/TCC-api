@@ -1,7 +1,7 @@
 <?php
 
 
-class logs(){
+class logs{
 
 	function registrar($autor, $acao, $sujeito, $efetivado){
 		
