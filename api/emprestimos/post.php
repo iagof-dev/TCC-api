@@ -16,14 +16,12 @@ switch ($action) {
                     $setClauses[] = "$key = '" . addslashes($value) . "'";
                 }
             } else {
-                http_response_code(400);
                 echo (json_encode(["status" => "error", "message" => "Um parâmetro inexistente foi enviado na requisição."]));
                 die();
             }
         }
 
         if (in_array(false, $verify)) {
-            http_response_code(400);
             echo (json_encode(["status" => "error", "message" => "Um parâmetro obrigatório está faltando."]));
             die();
         }
@@ -33,7 +31,6 @@ switch ($action) {
 
         $estado_emprestimos = json_decode((new DB())->query('SELECT * FROM estado_emprestimos where ID="'. $_POST['id_status_emprestimo'] .'";'), true);
         if($estado_emprestimos['status'] != 'success'){
-            http_response_code(400);
             echo(json_encode(['status' => 'error', 'message' => 'Estado de emprestimo não encontrado']));
             die();
         }
@@ -61,20 +58,17 @@ switch ($action) {
                 $valuesPart .= "'" . $value . "',";
                 $temp_value[$key] = $value;
             } else {
-                http_response_code(400);
                 echo json_encode(["status" => "error", "message" => "um parâmetro inexistente foi enviado na requisição."]);
                 die();
             }
         }
 
         if (in_array(false, $verify)) {
-            http_response_code(400);
             echo json_encode(["status" => "error", "message" => "um parâmetro obrigatório está faltando."]);
             die();
         }
 
         if($temp_value['data_aluguel'] == '0000-00-00'){
-            http_response_code(400);
             echo(json_encode(['status' => 'error', 'message' => 'Data de Aluguel Inválida.']));
             die();
         }

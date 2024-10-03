@@ -5,6 +5,10 @@ $message = "";
 
 switch ($action) {
     case 'criar':
+		if(!isset($_POST['genero'])){
+			echo(json_encode(['status' => 'error', 'message' => 'Campo não definido.']));
+			die();
+		}
         $com = "INSERT INTO generos (";
         $values = "";
         foreach ($_POST as $key => $value) {

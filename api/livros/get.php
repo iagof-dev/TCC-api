@@ -5,18 +5,18 @@ $rs = "";
 
 switch ($action) {
     case 'listar':
-        switch (@$param){
+        switch ($param){
             case 'genero': 
-                $com .= " WHERE lg.id_genero='@$param2'";
+                $com .= " WHERE lg.id_genero='$param2'";
                 break;
             case 'codigo':
-                $com .= " WHERE l.codigo='@$param2';";
+                $com .= " WHERE l.codigo='$param2';";
                 break;
 			case 'titulo':
-				$com .= "  WHERE l.titulo LIKE '%@$param2%'";
+				$com .= "  WHERE l.titulo LIKE '%$param2%'";
 				break;
 			case 'autor':
-				$com .= " WHERE a.nome like '%@$param2%'";
+				$com .= " WHERE a.nome like '%$param2%'";
 				break;
             default:
                 break;
@@ -30,4 +30,5 @@ switch ($action) {
 		echo(json_encode(['status' => 'error', 'message' => 'Defina um parâmetro de busca.']));
 		die();
 }
+
 echo((new DB())->query($com));
