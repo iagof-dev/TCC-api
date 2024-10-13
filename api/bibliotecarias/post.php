@@ -4,6 +4,13 @@ $message = "";
 
 switch ($action) {
     case 'criar':
+
+        if(!isset($_POST['nome'])){
+            echo(json_encode(['status' => 'success', 'message' => 'Campo nome não está definido.']));
+            die();
+        }
+
+
         $com = "INSERT INTO bibliotecarias (";
         $values = "";
         foreach ($_POST as $key => $value) {

@@ -5,6 +5,7 @@ $message = "";
 
 switch ($action) {
     case 'criar':
+
         $com = "INSERT INTO coordenadores (";
         $values = "";
         foreach ($_POST as $key => $value) {

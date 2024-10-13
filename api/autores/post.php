@@ -19,6 +19,14 @@ switch ($action) {
         if (array_search(false, array_values($verify)) !== false) { echo(json_encode(["status" => "error", "message" => "um parâmetro obrigatório está faltando."])); die(); }
 
 
+        $verification = json_decode((new db())->query("SELECT * FROM autores where nome='" . $_POST['nome'] . "';"));
+
+        if($verification->status == 'success'){
+            echo(json_encode(['status' => 'error', 'message' => 'Autor já existe!']));
+            die();
+        }
+
+
         $com = substr_replace($com, "", -1) . ") VALUES (";
         foreach (array_values($_POST) as $value) {
             $com .= "'" . $value . "',";
